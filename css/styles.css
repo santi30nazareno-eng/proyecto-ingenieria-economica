@@ -1,0 +1,191 @@
+/* ==========================================================
+   Ingeniería Económica — Hoja de estilos global
+   Para rediseñar: modifica SOLO las variables de :root.
+   ========================================================== */
+:root {
+  /* Colores */
+  --color-fondo: #f4f6f9;
+  --color-superficie: #ffffff;
+  --color-tinta: #1b2a3a;
+  --color-tinta-suave: #4a5a6b;
+  --color-primario: #1f4e79;
+  --color-primario-oscuro: #153756;
+  --color-acento: #a86a00;
+  --color-acento-fondo: #fff4dc;
+  --color-borde: #d5dce4;
+  --color-exito: #1d7a4b;
+  --color-error: #b3261e;
+
+  /* Tipografía (fuentes del sistema: sin dependencias externas) */
+  --fuente-texto: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fuente-titulo: Georgia, "Times New Roman", serif;
+  --fuente-formula: "Cambria Math", "STIX Two Math", Georgia, serif;
+
+  /* Medidas */
+  --ancho-contenido: 72ch;
+  --ancho-menu: 16rem;
+  --radio: 6px;
+  --espacio: 1.25rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  font-family: var(--fuente-texto);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-tinta);
+  background: var(--color-fondo);
+}
+
+h1, h2, h3 { font-family: var(--fuente-titulo); line-height: 1.25; color: var(--color-primario-oscuro); }
+h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin: 0 0 .5rem; }
+h2 { font-size: 1.5rem; margin: 0 0 .75rem; }
+h3 { font-size: 1.15rem; margin: 1.5rem 0 .5rem; }
+p  { margin: 0 0 1rem; }
+a  { color: var(--color-primario); }
+
+:focus-visible { outline: 3px solid var(--color-acento); outline-offset: 2px; }
+
+.saltar-contenido {
+  position: absolute; left: -999px; top: 0;
+  background: var(--color-primario); color: #fff; padding: .5rem 1rem; z-index: 100;
+}
+.saltar-contenido:focus { left: 0; }
+
+/* ---------- Estructura general ---------- */
+.sitio-cabecera {
+  background: var(--color-primario-oscuro);
+  color: #fff;
+  padding: .9rem var(--espacio);
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.sitio-cabecera a { color: #fff; text-decoration: none; font-family: var(--fuente-titulo); font-size: 1.2rem; }
+.boton-menu {
+  display: none;
+  background: transparent; color: #fff;
+  border: 1px solid rgba(255,255,255,.5); border-radius: var(--radio);
+  padding: .4rem .8rem; font: inherit; cursor: pointer;
+}
+
+.disposicion {
+  display: grid;
+  grid-template-columns: var(--ancho-menu) minmax(0, 1fr);
+  min-height: calc(100vh - 7rem);
+}
+
+/* ---------- Menú de navegación ---------- */
+.menu-lateral {
+  background: var(--color-superficie);
+  border-right: 1px solid var(--color-borde);
+  padding: var(--espacio);
+}
+.menu-lateral h2 { font-size: 1rem; font-family: var(--fuente-texto); color: var(--color-tinta-suave); margin-bottom: .5rem; }
+.menu-lateral ul { list-style: none; margin: 0 0 1.25rem; padding: 0; }
+.menu-lateral a {
+  display: block; padding: .45rem .7rem; border-radius: var(--radio);
+  text-decoration: none; color: var(--color-tinta);
+}
+.menu-lateral a:hover { background: var(--color-fondo); }
+.menu-lateral a[aria-current="page"] { background: var(--color-primario); color: #fff; }
+.menu-lateral .proximamente { display: block; padding: .45rem .7rem; color: var(--color-tinta-suave); font-style: italic; }
+
+/* ---------- Contenido ---------- */
+.contenido { padding: 2rem var(--espacio) 4rem; }
+.contenido > * { max-width: var(--ancho-contenido); }
+.contenido > .calculadora, .contenido > .rejilla-modulos { max-width: 60rem; }
+
+.seccion { margin-bottom: 2.5rem; }
+.seccion > h2 { padding-bottom: .4rem; border-bottom: 2px solid var(--color-borde); }
+
+.definicion {
+  background: var(--color-superficie);
+  border-left: 4px solid var(--color-primario);
+  padding: .8rem 1rem; border-radius: 0 var(--radio) var(--radio) 0;
+  margin: 1rem 0;
+}
+
+/* ---------- Fórmulas ---------- */
+.formula {
+  font-family: var(--fuente-formula);
+  font-size: 1.35rem;
+  text-align: center;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: .9rem 1rem;
+  margin: .75rem 0;
+  overflow-x: auto;
+}
+.formula small { display: block; font-family: var(--fuente-texto); font-size: .85rem; color: var(--color-tinta-suave); margin-top: .25rem; }
+.variables { padding-left: 1.2rem; }
+.variables li { margin-bottom: .25rem; }
+.contenido code { font-family: var(--fuente-formula); font-size: 1.05em; }
+
+/* ---------- Calculadora ---------- */
+.calculadora {
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-top: 4px solid var(--color-acento);
+  border-radius: var(--radio);
+  padding: var(--espacio);
+}
+.calculadora__rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.5rem; }
+.campo { margin-bottom: 1rem; }
+.campo label { display: block; font-weight: 600; margin-bottom: .25rem; }
+.campo__fila { display: flex; gap: .5rem; }
+.campo input, .campo select {
+  font: inherit; padding: .55rem .65rem; width: 100%;
+  border: 1px solid var(--color-borde); border-radius: var(--radio);
+  background: #fff; color: var(--color-tinta);
+}
+.campo__fila select { width: auto; flex: 0 0 auto; }
+.campo input[aria-invalid="true"] { border-color: var(--color-error); }
+.ayuda { font-size: .85rem; color: var(--color-tinta-suave); margin: .2rem 0 0; }
+
+.resultados { background: var(--color-fondo); border-radius: var(--radio); padding: 1rem; }
+.resultados h3 { margin-top: 0; }
+.resultado-clave { display: flex; justify-content: space-between; gap: 1rem; padding: .5rem 0; border-bottom: 1px solid var(--color-borde); }
+.resultado-clave strong { font-size: 1.25rem; font-family: var(--fuente-formula); }
+.resultado-clave--total strong { color: var(--color-exito); }
+.desglose { font-family: var(--fuente-formula); font-size: 1.05rem; margin-top: 1rem; overflow-x: auto; }
+.desglose p { margin: .35rem 0; white-space: nowrap; }
+.mensaje-error { color: var(--color-error); min-height: 1.5rem; margin: 0; }
+
+/* ---------- Ejercicios ---------- */
+.ejercicios { padding-left: 1.2rem; }
+.ejercicios li { margin-bottom: 1.25rem; }
+details { margin-top: .4rem; }
+summary { cursor: pointer; color: var(--color-primario); font-weight: 600; }
+details > div { background: var(--color-acento-fondo); border-radius: var(--radio); padding: .6rem .9rem; margin-top: .4rem; }
+
+/* ---------- Portada ---------- */
+.rejilla-modulos { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.tarjeta-modulo {
+  display: block; background: var(--color-superficie); border: 1px solid var(--color-borde);
+  border-left: 4px solid var(--color-primario); border-radius: var(--radio);
+  padding: 1rem; text-decoration: none; color: var(--color-tinta);
+}
+.tarjeta-modulo:hover { border-left-color: var(--color-acento); }
+.tarjeta-modulo h3 { margin: 0 0 .3rem; }
+.tarjeta-modulo p { margin: 0; color: var(--color-tinta-suave); font-size: .95rem; }
+
+.sitio-pie { text-align: center; color: var(--color-tinta-suave); font-size: .9rem; padding: 1.5rem; border-top: 1px solid var(--color-borde); }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 800px) {
+  .boton-menu { display: inline-block; }
+  .disposicion { grid-template-columns: 1fr; }
+  .menu-lateral { display: none; border-right: 0; border-bottom: 1px solid var(--color-borde); }
+  .menu-lateral.abierto { display: block; }
+  .resultado-clave { flex-direction: column; gap: 0; }
+}
+
+@media print {
+  .menu-lateral, .boton-menu, .sitio-cabecera { display: none; }
+  .disposicion { display: block; }
+}
