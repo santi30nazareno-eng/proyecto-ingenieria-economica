@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interés simple · Ingeniería Económica</title>
+  <meta name="description" content="Conceptos, fórmulas, calculadora interactiva y ejercicios de interés simple.">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body data-raiz="../" data-modulo="interes-simple">
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <header class="sitio-cabecera">
+    <a href="../index.html">Ingeniería Económica</a>
+    <button class="boton-menu" id="boton-menu" aria-expanded="false" aria-controls="menu-lateral">Menú</button>
+  </header>
+
+  <div class="disposicion">
+    <!-- NAVEGACIÓN (se genera desde js/config.js) -->
+    <nav class="menu-lateral" id="menu-lateral" aria-label="Módulos del curso"></nav>
+
+    <main class="contenido" id="contenido">
+      <h1>Interés simple</h1>
+      <p>Módulo del primer parcial. Estudia la teoría, prueba la calculadora y resuelve los ejercicios.</p>
+
+      <!-- ===== TEORÍA ===== -->
+      <article class="seccion" id="conceptos">
+        <h2>Conceptos</h2>
+        <p><strong>Interés</strong> es el pago por el uso del dinero ajeno durante un tiempo. Es el costo de pedir prestado y la ganancia de prestar o invertir.</p>
+        <div class="definicion">
+          <strong>Interés simple:</strong> el interés se calcula siempre sobre el capital original. Los intereses ganados no se suman al capital, por eso el interés crece en línea recta con el tiempo.
+        </div>
+        <h3>Elementos</h3>
+        <ul class="variables">
+          <li><code>C</code> (capital): dinero inicial prestado o invertido.</li>
+          <li><code>i</code> (tasa de interés): porcentaje que se cobra por periodo; en las fórmulas va en decimal (12 % = 0,12).</li>
+          <li><code>n</code> (tiempo): número de periodos. Debe estar en la misma unidad que la tasa.</li>
+          <li><code>I</code> (interés): ganancia o costo total del préstamo.</li>
+          <li><code>F</code> (monto o valor futuro): capital más interés.</li>
+        </ul>
+        <h3>Año comercial y año exacto</h3>
+        <p>Cuando el tiempo se da en días, se usa el año comercial (360 días) o el año exacto (365 días). El enunciado del problema indica cuál aplicar.</p>
+      </article>
+
+      <section class="seccion" id="formulas">
+        <h2>Fórmulas</h2>
+        <div class="formula">I = C · i · n <small>Interés total</small></div>
+        <div class="formula">F = C + I = C (1 + i · n) <small>Monto o valor futuro</small></div>
+        <h3>Despejes</h3>
+        <div class="formula">C = I / (i · n)</div>
+        <div class="formula">i = I / (C · n)</div>
+        <div class="formula">n = I / (C · i)</div>
+      </section>
+
+      <!-- ===== CALCULADORA ===== -->
+      <section class="seccion calculadora" id="calculadora" aria-labelledby="titulo-calc">
+        <h2 id="titulo-calc">Calculadora</h2>
+        <div class="calculadora__rejilla">
+          <form id="form-calculadora" novalidate>
+            <div class="campo">
+              <label for="capital">Capital (C)</label>
+              <input id="capital" type="text" inputmode="decimal" placeholder="Ej. 5000" autocomplete="off">
+              <p class="ayuda">Dinero inicial en dólares.</p>
+            </div>
+
+            <div class="campo">
+              <label for="tasa">Tasa de interés (i)</label>
+              <div class="campo__fila">
+                <input id="tasa" type="text" inputmode="decimal" placeholder="Ej. 18" autocomplete="off">
+                <select id="periodo-tasa" aria-label="Periodo de la tasa">
+                  <option value="anual" selected>% anual</option>
+                  <option value="semestral">% semestral</option>
+                  <option value="trimestral">% trimestral</option>
+                  <option value="bimestral">% bimestral</option>
+                  <option value="mensual">% mensual</option>
+                  <option value="diaria">% diaria</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label for="tiempo">Tiempo (n)</label>
+              <div class="campo__fila">
+                <input id="tiempo" type="text" inputmode="decimal" placeholder="Ej. 2" autocomplete="off">
+                <select id="unidad-tiempo" aria-label="Unidad del tiempo">
+                  <option value="anios" selected>años</option>
+                  <option value="meses">meses</option>
+                  <option value="dias">días</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label for="base-dias">Año para días</label>
+              <select id="base-dias">
+                <option value="360" selected>Comercial (360 días)</option>
+                <option value="365">Exacto (365 días)</option>
+              </select>
+            </div>
+            <p class="mensaje-error" id="mensaje-error" role="alert"></p>
+          </form>
+
+          <div class="resultados" aria-live="polite">
+            <h3>Resultados</h3>
+            <div class="resultado-clave"><span>Interés (I)</span><strong id="res-interes">—</strong></div>
+            <div class="resultado-clave resultado-clave--total"><span>Monto (F)</span><strong id="res-monto">—</strong></div>
+            <div class="desglose" id="desglose"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== EJERCICIOS ===== -->
+      <section class="seccion" id="ejercicios">
+        <h2>Ejercicios propuestos</h2>
+        <p>Resuélvelos primero a mano y luego verifica con la calculadora.</p>
+        <ol class="ejercicios">
+          <li>Se invierten $5.000 al 18 % anual durante 2 años. Calcula el interés y el monto.
+            <details><summary>Ver respuesta</summary><div>I = $1.800,00; F = $6.800,00.</div></details>
+          </li>
+          <li>Un préstamo de $12.000 cobra 1,5 % mensual durante 8 meses. ¿Cuánto se paga de interés y cuánto en total?
+            <details><summary>Ver respuesta</summary><div>I = $1.440,00; F = $13.440,00.</div></details>
+          </li>
+          <li>Calcula el interés de $8.000 al 12 % anual durante 90 días (año comercial).
+            <details><summary>Ver respuesta</summary><div>I = 8.000 × 0,12 × 90/360 = $240,00.</div></details>
+          </li>
+          <li>¿Qué capital produce $450 de interés en 9 meses a una tasa del 10 % anual? (Usa el despeje de C.)
+            <details><summary>Ver respuesta</summary><div>C = 450 / (0,10 × 0,75) = $6.000,00.</div></details>
+          </li>
+        </ol>
+      </section>
+    </main>
+  </div>
+
+  <footer class="sitio-pie">Ingeniería Económica · <span id="anio"></span></footer>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/interes-simple.js"></script>
+</body>
+</html>

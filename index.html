@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ingeniería Económica · Plataforma de estudio</title>
+  <meta name="description" content="Teoría, calculadoras interactivas y ejercicios de Ingeniería Económica.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-raiz="./">
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <header class="sitio-cabecera">
+    <a href="index.html">Ingeniería Económica</a>
+    <button class="boton-menu" id="boton-menu" aria-expanded="false" aria-controls="menu-lateral">Menú</button>
+  </header>
+
+  <div class="disposicion">
+    <nav class="menu-lateral" id="menu-lateral" aria-label="Módulos del curso"></nav>
+
+    <main class="contenido" id="contenido">
+      <h1>Plataforma de estudio</h1>
+      <p>Cada tema incluye conceptos, fórmulas, una calculadora que responde mientras escribes y ejercicios propuestos. Elige un módulo para empezar.</p>
+      <div class="rejilla-modulos" id="rejilla-modulos"></div>
+    </main>
+  </div>
+
+  <footer class="sitio-pie">Ingeniería Económica · <span id="anio"></span></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/nav.js"></script>
+</body>
+</html>
